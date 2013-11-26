@@ -12,10 +12,6 @@ public class DynamicIntArrayModel {
 		return lastPosition + 1;
 	}
 	
-	public int getMaxSize(){
-		return array.length;
-	}
-
 	public void setItem(int item, int pos) throws Exception {
 		if(pos >= 0 && pos <= lastPosition + 1){
 			lastPosition++;
@@ -24,7 +20,8 @@ public class DynamicIntArrayModel {
 			}
 			array[pos] = item;
 		}else{
-			//TODO we can create a new array with size increased and then add the card, but we dont need this funcionallity now.
+			//TODO if array is too small, we can create a new array with increased size, copy the old array and then add the new card, 
+			//but we dont need this funcionallity now.
 			throw new Exception("Illegal position.");
 		}
 	}

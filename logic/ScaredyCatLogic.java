@@ -64,7 +64,8 @@ public class ScaredyCatLogic {
 		scarecrows++;
 	}
 	
-	private int turnPlayer(int player) throws Exception{
+	public int makePlayerTurn(int player) throws Exception{
+		player--; //we work with an array that go between 0 and n_players - 1, argument go between 1 and n_players
 		int card = pile.getLastCard();
 		switch(card){
 		case Config.CARD_BIRD:
@@ -81,18 +82,11 @@ public class ScaredyCatLogic {
 		return card;
 	}
 	
-	private boolean endOfGame(){
+	public boolean endOfGame(){
 		return scarecrows == Config.NUMBER_SCARECROWS;
 	}
 	
-	private int changePlayer(int player){
-		player++;
-		if(player == Config.N_PLAYERS)
-			player = 0;
-		return player;
-	}
-	
-	private static DynamicIntArrayModel calculateWinnersArray(int[] scorePlayers) throws Exception {
+	public DynamicIntArrayModel calculateWinnersArray() throws Exception {
 		DynamicIntArrayModel winnersArray = new DynamicIntArrayModel(scorePlayers.length);
 		
 		int max_points = -1;
@@ -112,23 +106,8 @@ public class ScaredyCatLogic {
 		return winnersArray;
 	}
 	
-	public void play() throws Exception{
-		 
-		int player = 0;//turn first player, players go between 0 and n_player - 1
-		do{
-			int card = turnPlayer(player); 
-			
-			ScaredyCatInterface.showTurn(player + 1, card,scorePlayers);
-			
-			if(!endOfGame()){
-				player=changePlayer(player);
-			}
-		}while(!endOfGame());
-		
-		
-		DynamicIntArrayModel winners = calculateWinnersArray(scorePlayers);
-		ScaredyCatInterface.showWinner(scorePlayers, winners);
-		
+	public int[] getScorePlayers() {
+		return scorePlayers;
 	}
 
 }
