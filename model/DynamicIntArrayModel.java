@@ -11,6 +11,10 @@ public class DynamicIntArrayModel {
 	public int getSize(){
 		return lastPosition + 1;
 	}
+	
+	public int getMaxSize(){
+		return array.length;
+	}
 
 	public void setItem(int item, int pos) throws Exception {
 		if(pos >= 0 && pos <= lastPosition + 1){
@@ -46,6 +50,19 @@ public class DynamicIntArrayModel {
 	
 	public void empty(){
 		lastPosition = -1;
+	}
+	
+	public void shuffle() throws Exception {
+		int[] newarray = new int[array.length];
+		int newLastPosition = lastPosition;
+		
+		for(int i=0;i<=newLastPosition;i++){
+			int randomPos = (int)(Math.random() * (lastPosition + 1)); //(new Random(System.nanoTime())).nextInt(lastPosition+1);//(new Random()).nextInt(lastPosition+1); // 0 and lastPosition inclusive
+			newarray[i] = getItem(randomPos);
+		}
+		
+		array = newarray;
+		lastPosition = newLastPosition;
 	}
 	
 }
