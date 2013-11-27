@@ -24,8 +24,12 @@ public class ScaredyCatManager {
 	
 	private void initPlayersScore(){
 		for(int i = 0; i< scorePlayers.length;i++){
-			scorePlayers[i] = 0;
+			resetScorePlayer(i);
 		}
+	}
+	
+	private void resetScorePlayer(int player){
+		scorePlayers[player] = 0;
 	}
 	
 	private void initScarecrows(){
@@ -65,7 +69,7 @@ public class ScaredyCatManager {
 	private void makeCatTurn(int player, int card) throws Exception{
 		returnCards(player, card);
 		pile.shuffleCards();
-		scorePlayers[player]=0;
+		resetScorePlayer(player);
 	}
 	
 	private void makeScarecrowTurn(){
