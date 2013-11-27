@@ -55,10 +55,17 @@ public class ScaredyCatManager {
 		scorePlayers[player]++;
 	}
 	
-	private void makeCatTurn(int player, int card) throws Exception{
-		scorePlayers[player]=0;
+	private void returnCards(int player, int card) throws Exception{
+		for(int i = 0; i < scorePlayers[player];i++){
+			pile.setCard(Config.CARD_BIRD);
+		}
 		pile.setCard(card);
+	}
+	
+	private void makeCatTurn(int player, int card) throws Exception{
+		returnCards(player, card);
 		pile.shuffleCards();
+		scorePlayers[player]=0;
 	}
 	
 	private void makeScarecrowTurn(){
