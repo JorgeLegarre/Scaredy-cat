@@ -1,7 +1,7 @@
 package scaredyCat;
 
 import scaredyCat.constants.Config;
-import scaredyCat.logic.ScaredyCatLogic;
+import scaredyCat.logic.ScaredyCatManager;
 import scaredyCat.ui.ScaredyCatInterface;
 
 public class ScaredyCatPlay {
@@ -13,19 +13,19 @@ public class ScaredyCatPlay {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		ScaredyCatLogic scaredyCat = new ScaredyCatLogic();
+		ScaredyCatManager scaredyCat = new ScaredyCatManager();
 		
 		int player = 1;
 		do{
 			int card = scaredyCat.makePlayerTurn(player); 
 			
-			ScaredyCatInterface.showTurn(player, card, scaredyCat.getScorePlayers());
+			ScaredyCatInterface.showTurn(player, card, scaredyCat.getScore(),scaredyCat.getFindedScarecrows());
 			
 			player=changePlayer(player);
 			
 		}while(!scaredyCat.endOfGame());
 		
 		
-		ScaredyCatInterface.showWinner(scaredyCat.getScorePlayers(), scaredyCat.calculateWinnersArray());
+		ScaredyCatInterface.showWinner(scaredyCat.getScore(), scaredyCat.getWinners());
 	}
 }

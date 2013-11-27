@@ -12,7 +12,7 @@ public class DynamicIntArrayModel {
 		return lastPosition + 1;
 	}
 	
-	public void setItem(int item, int pos) throws Exception {
+	public void addItem(int item, int pos) throws Exception {
 		if(pos >= 0 && pos <= lastPosition + 1){
 			lastPosition++;
 			for (int i = lastPosition; i > pos; i--) {
@@ -26,8 +26,7 @@ public class DynamicIntArrayModel {
 		}
 	}
 	
-	//we query the item and then remove from the pile
-	public int getItem(int position) throws Exception{
+	public int retrieveItem(int position) throws Exception{
 		int item;
 		
 		if(position >= 0 && position <= lastPosition){
@@ -54,8 +53,8 @@ public class DynamicIntArrayModel {
 		int newLastPosition = lastPosition;
 		
 		for(int i=0;i<=newLastPosition;i++){
-			int randomPos = (int)(Math.random() * (lastPosition + 1)); //(new Random(System.nanoTime())).nextInt(lastPosition+1);//(new Random()).nextInt(lastPosition+1); // 0 and lastPosition inclusive
-			newarray[i] = getItem(randomPos);
+			int randomPos = (int)(Math.random() * (lastPosition + 1)); //(new Random()).nextInt(lastPosition+1); //(new Random(System.nanoTime())).nextInt(lastPosition+1); // 0 and lastPosition inclusive
+			newarray[i] = retrieveItem(randomPos);
 		}
 		
 		array = newarray;

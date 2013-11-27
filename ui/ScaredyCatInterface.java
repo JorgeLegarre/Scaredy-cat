@@ -42,7 +42,7 @@ public class ScaredyCatInterface {
 		
 		int nWinners = winnersModel.getSize();
 		for (int i = 0; i < nWinners; i++) {
-			winners += winnersModel.getItem(0);
+			winners += winnersModel.retrieveItem(0);
 			if(winnersModel.getSize() > 0)
 				winners += " and ";
 		}
@@ -53,9 +53,18 @@ public class ScaredyCatInterface {
 		
 	}
 	
-	public static void showTurn(int player, int card, int[] scorePlayers) throws IOException {
+	private static void printDraw(){
+		System.out.println("It's a draw!!!!.");
+	}
+	
+	private static boolean isDraw(int[] scorePlayers, DynamicIntArrayModel winners){
+		return winners.getSize() == scorePlayers.length;
+	}
+	
+	public static void showTurn(int player, int card, int[] scorePlayers, int scaredyCrows) throws IOException {
 		System.out.println();
 		System.out.println("Player " + player + " obtained a " + getTextCard(card) + ".");
+		System.out.println("Scaredycrows finded: " + scaredyCrows);
 		System.out.println("Scores: ");
 		printScores(scorePlayers);
 		
@@ -66,13 +75,11 @@ public class ScaredyCatInterface {
 
 	public static void showWinner(int[] scorePlayers, DynamicIntArrayModel winners) throws Exception {
 			System.out.println();
-			if(winners.getSize() == scorePlayers.length){
-				System.out.println("It's a draw!!!!.");
+			if(isDraw(scorePlayers,winners)){
+				printDraw();				
 			}else{
 				printWinners(winners);
 			}
-
-			printScores(scorePlayers);
 		
 	}
 
